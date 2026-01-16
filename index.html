@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SRM для будівельної компанії</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app__header">
+        <div>
+          <p class="eyebrow">SRM платформа</p>
+          <h1>SRM для будівельної компанії</h1>
+          <p class="subtitle">
+            Повноцінний веб-кабінет для управління постачальниками, заявками та
+            поставками. Усе, що потрібно для запуску — це браузер.
+          </p>
+        </div>
+        <div class="header__actions">
+          <button class="btn btn--primary" id="create-rfq">Створити RFQ</button>
+          <button class="btn btn--ghost" id="export-data">Експорт даних</button>
+          <button class="btn btn--ghost" id="export-zip">Завантажити ZIP</button>
+        </div>
+      </header>
+
+      <section class="grid grid--2">
+        <div class="card">
+          <h2>Панель KPI</h2>
+          <div class="kpi-grid" id="kpi-grid"></div>
+        </div>
+        <div class="card">
+          <h2>Статус процесів</h2>
+          <div class="timeline" id="process-timeline"></div>
+        </div>
+      </section>
+
+      <section class="grid grid--3">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h2>Постачальники</h2>
+              <p class="muted">Рейтинг, сертифікати та статус SLA</p>
+            </div>
+            <div class="stack">
+              <input class="input" id="supplier-filter" type="search" placeholder="Пошук постачальника" />
+              <button class="btn btn--small" id="add-supplier">+ Додати</button>
+            </div>
+          </div>
+          <div class="list" id="supplier-list"></div>
+        </div>
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h2>Активні RFQ</h2>
+              <p class="muted">Статус тендерів та бюджет</p>
+            </div>
+            <div class="stack">
+              <select class="input" id="rfq-filter">
+                <option value="all">Усі</option>
+                <option value="Пропозиції">Пропозиції</option>
+                <option value="Оцінка">Оцінка</option>
+                <option value="Контракт">Контракт</option>
+              </select>
+              <button class="btn btn--small" id="add-rfq">+ Додати</button>
+            </div>
+          </div>
+          <div class="list" id="rfq-list"></div>
+        </div>
+        <div class="card">
+          <div class="card__header">
+            <h2>Поставки</h2>
+            <button class="btn btn--small" id="add-delivery">+ Поставка</button>
+          </div>
+          <div class="list" id="delivery-list"></div>
+        </div>
+      </section>
+
+      <section class="grid grid--2">
+        <div class="card">
+          <h2>Контроль бюджету по об'єктах</h2>
+          <div class="budget" id="budget-table"></div>
+        </div>
+        <div class="card">
+          <h2>Планування потреб</h2>
+          <div class="needs" id="needs-list"></div>
+        </div>
+      </section>
+
+      <section class="grid grid--2">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h2>Рахунки та оплати</h2>
+              <p class="muted">3-way match та статус інвойсів</p>
+            </div>
+            <button class="btn btn--small" id="add-invoice">+ Інвойс</button>
+          </div>
+          <div class="list" id="invoice-list"></div>
+        </div>
+        <div class="card">
+          <h2>Контракти та SLA</h2>
+          <div class="list" id="contract-list"></div>
+        </div>
+      </section>
+
+      <section class="grid grid--2">
+        <div class="card">
+          <h2>Документообіг та відповідність</h2>
+          <div class="compliance" id="compliance-list"></div>
+        </div>
+        <div class="card">
+          <h2>Комунікації</h2>
+          <div class="chat" id="chat-window"></div>
+          <div class="chat__input">
+            <input class="input" id="chat-input" type="text" placeholder="Напишіть повідомлення" />
+            <button class="btn btn--primary" id="send-message">Надіслати</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid grid--2">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h2>Завдання команди</h2>
+              <p class="muted">Щоденні пріоритети</p>
+            </div>
+            <button class="btn btn--small" id="add-task">+ Завдання</button>
+          </div>
+          <div class="tasks" id="task-list"></div>
+        </div>
+        <div class="card">
+          <h2>Ризики та алерти</h2>
+          <div class="list" id="risk-list"></div>
+        </div>
+      </section>
+
+      <footer class="app__footer">
+        <div>
+          <strong>Готово до запуску на ПК:</strong> відкрийте цей файл або запустіть локальний сервер.
+        </div>
+        <div class="footer__links">
+          <a href="README.md" target="_blank" rel="noreferrer">Інструкція запуску</a>
+          <a href="SRM_SYSTEM.md" target="_blank" rel="noreferrer">Специфікація SRM</a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="modal" id="modal" aria-hidden="true">
+      <div class="modal__content">
+        <div class="modal__header">
+          <h3 id="modal-title">Створити</h3>
+          <button class="btn btn--icon" id="close-modal">✕</button>
+        </div>
+        <form class="modal__body" id="modal-form"></form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
